@@ -1,0 +1,52 @@
+<resources>
+
+    <string name="app_name">Al-Quran Khatam</string>
+
+    <string name="paraOneButtonLabel">01</string>
+    <string name="paraTwoButtonLabel">02</string>
+    <string name="paraThreeButtonLabel">03</string>
+    <string name="paraFourButtonLabel">04</string>
+    <string name="paraFiveButtonLabel">05</string>
+
+    <string name="paraSixButtonLabel">06</string>
+    <string name="paraSevenButtonLabel">07</string>
+    <string name="paraEightButtonLabel">08</string>
+    <string name="paraNineButtonLabel">09</string>
+    <string name="paraTenButtonLabel">10</string>
+
+    <string name="paraElevenButtonLabel">11</string>
+    <string name="paraTwelveButtonLabel">12</string>
+    <string name="paraThirteenButtonLabel">13</string>
+    <string name="paraFourteenButtonLabel">14</string>
+    <string name="paraFifteenButtonLabel">15</string>
+
+    <string name="paraSixteenButtonLabel">16</string>
+    <string name="paraSeventeenButtonLabel">17</string>
+    <string name="paraEighteenButtonLabel">18</string>
+    <string name="paraNineteenButtonLabel">19</string>
+    <string name="paraTwentyButtonLabel">20</string>
+
+    <string name="paraTwentyOneButtonLabel">21</string>
+    <string name="paraTwentyTwoButtonLabel">22</string>
+    <string name="paraTwentyThreeButtonLabel">23</string>
+    <string name="paraTwentyFourButtonLabel">24</string>
+    <string name="paraTwentyFiveButtonLabel">25</string>
+
+    <string name="paraTwentySixButtonLabel">26</string>
+    <string name="paraTwentySevenButtonLabel">27</string>
+    <string name="paraTwentyEightButtonLabel">28</string>
+    <string name="paraTwentyNineButtonLabel">29</string>
+    <string name="paraThirtyButtonLabel">30</string>
+
+    <string name="updateStatusLabel">Update Status</string>
+
+    <string name="nextKhatamDateLabelText">Next Khatam Date</string>
+    <string name="previousKhatamDateButton">Go to previous khatam status</string>
+    <string name="nextKhatamDateButton">Go to next khatam status</string>
+    <string name="khatamStatusLabel">Khatam Status</string>
+    <string name="statusTextView">paras completed.</string>
+    <string name="createNewDateButtonText">Create New Date</string>
+    <string name="exitButtonText">Exit</string>
+    <string name="exitApplicationDesc">exit application</string>
+
+</resources>

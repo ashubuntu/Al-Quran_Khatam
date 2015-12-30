@@ -84,11 +84,16 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Intent intent = null;
 
         switch (id) {
             case R.id.createNewDateButton:
-                Intent intent = new Intent(this, AddNewKhatamDate.class);
+                intent = new Intent(this, AddNewKhatamDate.class);
                 startActivityForResult(intent, 1);
+                return true;
+            case R.id.deleteDateButton:
+                intent = new Intent(this, DeleteKhatamDate.class);
+                startActivityForResult(intent, 2);
                 return true;
         }
 
@@ -108,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
                 recreate();
                 //if there's no result
             }
+        } else {
+
         }
     }
 
@@ -222,7 +229,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteKhatamDate(View view) {
-
+        Intent intent = new Intent(this, DeleteKhatamDate.class);
+        startActivityForResult(intent, 2);
     }
 
     public void endApplication(View view) {

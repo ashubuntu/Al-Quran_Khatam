@@ -34,7 +34,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Choose a Date:"
-                    android:textSize="17dp"
+                    android:textSize="17sp"
                     android:layout_weight="1" />
 
                 <EditText

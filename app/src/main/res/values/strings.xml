@@ -48,5 +48,6 @@
     <string name="createNewDateButtonText">Create New Date</string>
     <string name="exitButtonText">Exit</string>
     <string name="exitApplicationDesc">exit application</string>
+    <string name="deleteDateButtonText">Delete Date</string>
 
 </resources>

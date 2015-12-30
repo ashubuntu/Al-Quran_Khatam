@@ -319,6 +319,20 @@
 
             </TableRow>
 
+            <TableRow
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/deleteDateButton"
+                    android:onClick="deleteKhatamDate"
+                    android:text="@string/deleteDateButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+            </TableRow>
+
             <TableRow android:gravity="center_horizontal">
 
                 <Button

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ashubuntu.al_quran_khatam.MainActivity">
+
+    <item
+        android:id="@id/createNewDateButton"
+        android:title="@string/createNewDateButtonText" />
+
+    <item
+        android:id="@id/deleteDateButton"
+        android:title="@string/deleteDateButtonText" />
+
+</menu>

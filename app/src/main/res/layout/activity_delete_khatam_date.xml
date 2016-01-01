@@ -27,7 +27,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chosenDateSpnr"
+            android:id="@+id/nextKhatamDatesDropDown"
             android:layout_alignParentTop="false"
             android:layout_toRightOf="@+id/dateChooserTV"
             android:layout_toEndOf="@+id/dateChooserTV"
@@ -39,7 +39,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/chosenDateSpnr"
+            android:layout_below="@+id/nextKhatamDatesDropDown"
             android:layout_centerHorizontal="true"
             android:id="@+id/parasGrid"
             android:layout_marginTop="@dimen/activity_vertical_margin">
@@ -48,31 +48,26 @@
                 <Button
                     android:id="@+id/paraOneButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraOneButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwoButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwoButtonLabel" />
 
                 <Button
                     android:id="@+id/paraThreeButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraThreeButtonLabel" />
 
                 <Button
                     android:id="@+id/paraFourButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraFourButtonLabel" />
 
                 <Button
                     android:id="@+id/paraFiveButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraFiveButtonLabel" />
             </TableRow>
 
@@ -81,31 +76,26 @@
                 <Button
                     android:id="@+id/paraSixButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraSixButtonLabel" />
 
                 <Button
                     android:id="@+id/paraSevenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraSevenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraEightButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraEightButtonLabel" />
 
                 <Button
                     android:id="@+id/paraNineButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraNineButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTenButtonLabel" />
             </TableRow>
 
@@ -114,31 +104,26 @@
                 <Button
                     android:id="@+id/paraElevenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraElevenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwelveButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwelveButtonLabel" />
 
                 <Button
                     android:id="@+id/paraThirteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraThirteenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraFourteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraFourteenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraFifteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraFifteenButtonLabel" />
             </TableRow>
 
@@ -147,31 +132,26 @@
                 <Button
                     android:id="@+id/paraSixteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraSixteenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraSeventeenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraSeventeenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraEighteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraEighteenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraNineteenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraNineteenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyButtonLabel" />
             </TableRow>
 
@@ -180,31 +160,26 @@
                 <Button
                     android:id="@+id/paraTwentyOneButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyOneButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyTwoButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyTwoButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyThreeButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyThreeButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyFourButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyFourButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyFiveButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyFiveButtonLabel" />
             </TableRow>
 
@@ -213,32 +188,41 @@
                 <Button
                     android:id="@+id/paraTwentySixButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentySixButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentySevenButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentySevenButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyEightButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyEightButtonLabel" />
 
                 <Button
                     android:id="@+id/paraTwentyNineButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraTwentyNineButtonLabel" />
 
                 <Button
                     android:id="@+id/paraThirtyButton"
                     style="@style/ParasButtonStyle"
-                    android:onClick="flipStatus"
                     android:text="@string/paraThirtyButtonLabel" />
+            </TableRow>
+
+            <TableRow android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/my_common_spacing"
+                android:layout_marginBottom="@dimen/activity_vertical_margin">
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/statusMessage"
+                    android:singleLine="false"
+                    android:visibility="visible"
+                    android:textStyle="italic"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </TableRow>
 
         </TableLayout>

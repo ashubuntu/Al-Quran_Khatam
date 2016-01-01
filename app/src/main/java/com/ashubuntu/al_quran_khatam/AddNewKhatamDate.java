@@ -232,11 +232,9 @@ public class AddNewKhatamDate extends FragmentActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             userLocalStore.storeCurrentDate(getChosenDate());
-            //Log.d("currentdate", userLocalStore.readCurrentDate());
             Intent intent = new Intent(AddNewKhatamDate.this, MainActivity.class);
             intent.putExtra("currentDate", userLocalStore.readCurrentDate());
             setResult(Activity.RESULT_OK, intent);
-            //startActivity(intent);
             finish();
         }
     }

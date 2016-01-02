@@ -17,9 +17,9 @@ import java.net.URLEncoder;
 
 
 public class ServerRequests {
-    private static final String SERVER_ADDRESS = "http://10.0.2.2/";
+    //private static final String SERVER_ADDRESS = "http://10.0.2.2/";
     //private static final String SERVER_ADDRESS = "http://localhost/";
-    //private static final String SERVER_ADDRESS = "http://ashubuntu.orgfree.com/";
+    private static final String SERVER_ADDRESS = "http://ashubuntu.orgfree.com/";
     private static final int CONNECTION_TIMEOUT = 15 * 1000;
 
     public ServerRequests() {}

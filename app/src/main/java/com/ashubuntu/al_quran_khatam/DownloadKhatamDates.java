@@ -2,7 +2,6 @@ package com.ashubuntu.al_quran_khatam;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

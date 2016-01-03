@@ -3,7 +3,6 @@ package com.ashubuntu.al_quran_khatam;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Spinner;
 
 import org.json.JSONObject;
@@ -13,8 +12,6 @@ public class UpdateKhatamStatus extends AsyncTask<String, Void, Void> {
     UserLocalStore userLocalStore;
     Spinner nextKhatamDatesDropDown;
 
-    JSONObject jsonObject = new JSONObject();
-
     public UpdateKhatamStatus(Activity activity) {
         this.activity = activity;
         userLocalStore = new UserLocalStore(activity);
@@ -23,10 +20,6 @@ public class UpdateKhatamStatus extends AsyncTask<String, Void, Void> {
 
     public String getSelectedDate() {
         return nextKhatamDatesDropDown.getSelectedItem().toString();
-    }
-
-    public void refreshKhatamStatus() {
-        new DownloadKhatamStatus(activity).execute(userLocalStore.readCurrentDate());
     }
 
     @Override

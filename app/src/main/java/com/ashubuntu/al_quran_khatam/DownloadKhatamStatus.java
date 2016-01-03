@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,9 +13,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
-import static java.util.Collections.sort;
 
 
 public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {

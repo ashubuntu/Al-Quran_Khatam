@@ -11,7 +11,6 @@ import java.util.List;
 public class UserLocalStore {
     public static final String SP_NAME = "Khatams";
     public static final String KHATAM_DATE = "khatam_date_";
-    public static final String PARA_STATUS = "status_para_";
     SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Activity activity) {
@@ -55,20 +54,10 @@ public class UserLocalStore {
         return userLocalDatabase.getString(para,"0");
     }
 
-    public void setParaStatus(String para, String status) {
-        SharedPreferences.Editor editor = userLocalDatabase.edit();
-        editor.putString(para, status);
-        editor.apply();
-    }
-
     public void clearUserData() {
         SharedPreferences.Editor editor = userLocalDatabase.edit();
         editor.clear();
         editor.apply();
-    }
-
-    public String readKhatamDate(String date) {
-        return userLocalDatabase.getString(date,"");
     }
 
     public void storeCurrentDate(String currentDate) {
@@ -95,10 +84,6 @@ public class UserLocalStore {
         SharedPreferences.Editor editor = userLocalDatabase.edit();
         editor.putString("dateCount", String.valueOf(dateCount));
         editor.apply();
-    }
-
-    public int readDateCount() {
-        return Integer.parseInt(userLocalDatabase.getString("dateCount", "0"));
     }
 
     public void storeParasCompleted(int parasCompleted) {

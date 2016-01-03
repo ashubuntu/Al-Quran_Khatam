@@ -30,25 +30,20 @@ public class UserLocalStore {
     }
 
     public void storeKhatamStatus(List<String> khatamStatus) {
-        SharedPreferences.Editor editor = userLocalDatabase.edit();
-        Iterator<String> khatamStatusIterator = khatamStatus.iterator();
-        int i = 1;
-        while (khatamStatusIterator.hasNext()) {
-            editor.putString(PARA_STATUS + i, khatamStatusIterator.next());
-            i++ ;
-        }
-        editor.apply();
-    }
-
-    public void updateKhatamStatus() {
         StringBuilder khatamStatusBuilder = new StringBuilder();
         SharedPreferences.Editor editor = userLocalDatabase.edit();
-        int i = 0;
-        while (++ i < 31) {
-            khatamStatusBuilder.append(userLocalDatabase.getString(PARA_STATUS + i, "0"));
+
+        for (String paraStatus : khatamStatus) {
+            khatamStatusBuilder.append(paraStatus);
             khatamStatusBuilder.append(" ");
         }
         editor.putString("khatamStatus", String.valueOf(khatamStatusBuilder));
+        editor.apply();
+    }
+
+    public void updateKhatamStatus(StringBuilder helper) {
+        SharedPreferences.Editor editor = userLocalDatabase.edit();
+        editor.putString("khatamStatus", String.valueOf(helper));
         editor.apply();
     }
 

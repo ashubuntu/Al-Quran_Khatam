@@ -1,6 +1,7 @@
 package com.ashubuntu.al_quran_khatam;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;

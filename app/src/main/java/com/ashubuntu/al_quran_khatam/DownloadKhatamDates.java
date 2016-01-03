@@ -19,12 +19,12 @@ import java.util.List;
 public class DownloadKhatamDates extends AsyncTask<Void, Void, Void> {
     Activity activity;
     UserLocalStore userLocalStore;
-
     Spinner nextKhatamDatesDropDown;
 
     protected List<String> khatamDates = new ArrayList<>();
     JSONObject jsonObject = new JSONObject();
     Iterator<String> keys;
+    Iterator<String> keysHelper;
 
     public DownloadKhatamDates(Activity activity) {
         this.activity = activity;
@@ -40,16 +40,23 @@ public class DownloadKhatamDates extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        long currentDatePosition = 0, i = 0;
+        long currentDatePosition = 0, datesCount = 0;
         String date;
+        String key;
         try {
             keys = jsonObject.keys();
+            keysHelper = jsonObject.keys();
+            while (keysHelper.hasNext()) {
+                ++ datesCount;
+                keysHelper.next();
+            }
+            initKhatamDates(datesCount);
             while (keys.hasNext()){
-                date = jsonObject.getString(keys.next());
-                khatamDates.add(date);
+                key = keys.next();
+                date = jsonObject.getString(key);
+                khatamDates.set(Integer.valueOf(key), date);
                 if(date.equals(userLocalStore.readCurrentDate()))
-                    currentDatePosition = i;
-                i++;
+                    currentDatePosition = Integer.valueOf(key);
 
             }
         } catch (JSONException e) {
@@ -67,7 +74,7 @@ public class DownloadKhatamDates extends AsyncTask<Void, Void, Void> {
 
         userLocalStore.storeCurrentDate(nextKhatamDatesDropDown.getSelectedItem().toString());
         //userLocalStore.storeCurrentDatePosition(nextKhatamDatesDropDown.getSelectedItemPosition());
-        new DownloadKhatamStatus(activity).execute(userLocalStore.readCurrentDate());
+        //new DownloadKhatamStatus(activity).execute(userLocalStore.readCurrentDate());
 
         userLocalStore.storeDateCount(adapter.getCount());
 
@@ -87,5 +94,10 @@ public class DownloadKhatamDates extends AsyncTask<Void, Void, Void> {
 
         userLocalStore.storeKhatamDates(khatamDates);
         super.onPostExecute(aVoid);
+    }
+
+    private void initKhatamDates(long datesCount) {
+        for (int i = 0; i <datesCount; i++)
+            khatamDates.add("");
     }
 }

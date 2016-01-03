@@ -75,6 +75,7 @@ public class AddNewKhatamDate extends FragmentActivity {
         helper = new StringBuilder();
         for (int i = 0; i<30; i++)
             helper.append("0 ");
+        //Log.d("Helper", helper.toString());
     }
 
     public void showDatePickerDialog(View view) {
@@ -224,6 +225,7 @@ public class AddNewKhatamDate extends FragmentActivity {
             ContentValues dataToSend = new ContentValues();
             dataToSend.put("date", getChosenDate());
             dataToSend.put("khatamStatus", helper.toString());
+            //Log.d("Helper", helper.toString());
             new ServerRequests().sendServerRequest("POST", "insert_new_khatam_date.php", dataToSend);
             return null;
         }
@@ -234,6 +236,7 @@ public class AddNewKhatamDate extends FragmentActivity {
             userLocalStore.storeCurrentDate(getChosenDate());
             Intent intent = new Intent(AddNewKhatamDate.this, MainActivity.class);
             intent.putExtra("currentDate", userLocalStore.readCurrentDate());
+            intent.putExtra("khatamStatus", helper.toString());
             setResult(Activity.RESULT_OK, intent);
             finish();
         }

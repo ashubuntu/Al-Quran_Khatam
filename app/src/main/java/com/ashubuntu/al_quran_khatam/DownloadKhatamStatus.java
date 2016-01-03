@@ -14,6 +14,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
+import static java.util.Collections.sort;
 
 
 public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {
@@ -38,6 +41,7 @@ public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {
         userLocalStore = new UserLocalStore(activity);
         dataToSend = new ContentValues();
         khatamStatus = new ArrayList<>();
+        initKhatamStatus();
 
         para1 = (Button) activity.findViewById(R.id.paraOneButton);
         para2 = (Button) activity.findViewById(R.id.paraTwoButton);
@@ -73,6 +77,11 @@ public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {
         statusMessage = (TextView) activity.findViewById(R.id.statusMessage);
     }
 
+    private void initKhatamStatus() {
+        for(int i = 0; i<30; i++)
+            khatamStatus.add("0");
+    }
+
     @Override
     protected Void doInBackground(String... params) {
         dataToSend.put("date", params[0]);
@@ -83,20 +92,23 @@ public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         Iterator<String> keys;
+        String key;
         String status;
         int parasCompleted = 0;
 
         try {
             keys = jsonObject.keys();
             while (keys.hasNext()){
-                status = jsonObject.getString(keys.next());
+                key = keys.next();
+                status = jsonObject.getString(key);
                 if (status.equals("1"))
-                    parasCompleted ++;
-                khatamStatus.add(status);
+                    parasCompleted++;
+                khatamStatus.set(Integer.valueOf(key), status);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         userLocalStore.storeKhatamStatus(khatamStatus);
         userLocalStore.storeParasCompleted(parasCompleted);
         loadKhatamStatus();
@@ -105,41 +117,41 @@ public class DownloadKhatamStatus extends AsyncTask<String, Void, Void> {
     }
 
     private void loadKhatamStatus() {
-        para1.setBackgroundColor(getColor("status_para_1"));
-        para2.setBackgroundColor(getColor("status_para_2"));
-        para3.setBackgroundColor(getColor("status_para_3"));
-        para4.setBackgroundColor(getColor("status_para_4"));
-        para5.setBackgroundColor(getColor("status_para_5"));
-        para6.setBackgroundColor(getColor("status_para_6"));
-        para7.setBackgroundColor(getColor("status_para_7"));
-        para8.setBackgroundColor(getColor("status_para_8"));
-        para9.setBackgroundColor(getColor("status_para_9"));
-        para10.setBackgroundColor(getColor("status_para_10"));
-        para11.setBackgroundColor(getColor("status_para_11"));
-        para12.setBackgroundColor(getColor("status_para_12"));
-        para13.setBackgroundColor(getColor("status_para_13"));
-        para14.setBackgroundColor(getColor("status_para_14"));
-        para15.setBackgroundColor(getColor("status_para_15"));
-        para16.setBackgroundColor(getColor("status_para_16"));
-        para17.setBackgroundColor(getColor("status_para_17"));
-        para18.setBackgroundColor(getColor("status_para_18"));
-        para19.setBackgroundColor(getColor("status_para_19"));
-        para20.setBackgroundColor(getColor("status_para_20"));
-        para21.setBackgroundColor(getColor("status_para_21"));
-        para22.setBackgroundColor(getColor("status_para_22"));
-        para23.setBackgroundColor(getColor("status_para_23"));
-        para24.setBackgroundColor(getColor("status_para_24"));
-        para25.setBackgroundColor(getColor("status_para_25"));
-        para26.setBackgroundColor(getColor("status_para_26"));
-        para27.setBackgroundColor(getColor("status_para_27"));
-        para28.setBackgroundColor(getColor("status_para_28"));
-        para29.setBackgroundColor(getColor("status_para_29"));
-        para30.setBackgroundColor(getColor("status_para_30"));
+        para1.setBackgroundColor(getColor(khatamStatus.get(0)));
+        para2.setBackgroundColor(getColor(khatamStatus.get(1)));
+        para3.setBackgroundColor(getColor(khatamStatus.get(2)));
+        para4.setBackgroundColor(getColor(khatamStatus.get(3)));
+        para5.setBackgroundColor(getColor(khatamStatus.get(4)));
+        para6.setBackgroundColor(getColor(khatamStatus.get(5)));
+        para7.setBackgroundColor(getColor(khatamStatus.get(6)));
+        para8.setBackgroundColor(getColor(khatamStatus.get(7)));
+        para9.setBackgroundColor(getColor(khatamStatus.get(8)));
+        para10.setBackgroundColor(getColor(khatamStatus.get(9)));
+        para11.setBackgroundColor(getColor(khatamStatus.get(10)));
+        para12.setBackgroundColor(getColor(khatamStatus.get(11)));
+        para13.setBackgroundColor(getColor(khatamStatus.get(12)));
+        para14.setBackgroundColor(getColor(khatamStatus.get(13)));
+        para15.setBackgroundColor(getColor(khatamStatus.get(14)));
+        para16.setBackgroundColor(getColor(khatamStatus.get(15)));
+        para17.setBackgroundColor(getColor(khatamStatus.get(16)));
+        para18.setBackgroundColor(getColor(khatamStatus.get(17)));
+        para19.setBackgroundColor(getColor(khatamStatus.get(18)));
+        para20.setBackgroundColor(getColor(khatamStatus.get(19)));
+        para21.setBackgroundColor(getColor(khatamStatus.get(20)));
+        para22.setBackgroundColor(getColor(khatamStatus.get(21)));
+        para23.setBackgroundColor(getColor(khatamStatus.get(22)));
+        para24.setBackgroundColor(getColor(khatamStatus.get(23)));
+        para25.setBackgroundColor(getColor(khatamStatus.get(24)));
+        para26.setBackgroundColor(getColor(khatamStatus.get(25)));
+        para27.setBackgroundColor(getColor(khatamStatus.get(26)));
+        para28.setBackgroundColor(getColor(khatamStatus.get(27)));
+        para29.setBackgroundColor(getColor(khatamStatus.get(28)));
+        para30.setBackgroundColor(getColor(khatamStatus.get(29)));
     }
 
     // utility methods follow
-    public int getColor(String para) {
-        return userLocalStore.readParaStatus(para).equals("0")?
+    public int getColor(String paraStatus) {
+        return paraStatus.equals("0")?
                 ContextCompat.getColor(activity, R.color.parasButtonOFF):
                 ContextCompat.getColor(activity, R.color.parasButtonON);
 

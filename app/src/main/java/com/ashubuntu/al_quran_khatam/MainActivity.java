@@ -3,8 +3,10 @@ package com.ashubuntu.al_quran_khatam;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +16,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     UserLocalStore userLocalStore;
-
+    boolean initKhatamStatus;
+    StringBuilder helper;
     Spinner nextKhatamDatesDropDown;
 
     Button  para1, para2, para3, para4, para5,
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initKhatamStatus = false;
         userLocalStore = new UserLocalStore(this);
 
         nextKhatamDatesDropDown = (Spinner) findViewById(R.id.nextKhatamDatesDropDown);
@@ -67,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         downloadKhatamDates();
     }
 
+    private void initKhatamStatus() {
+        helper = new StringBuilder(userLocalStore.readKhatamStatus());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -96,26 +103,38 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void refresh() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recreate();
+            }
+        }, 1);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 String currentDate=data.getStringExtra("currentDate");
+                String khatamStatus = data.getStringExtra("khatamStatus");
                 userLocalStore.storeCurrentDate(currentDate);
-                recreate();
+                userLocalStore.updateKhatamStatus(new StringBuilder(khatamStatus));
+                refresh();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                recreate();
+                refresh();
             }
         } else if (requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
                 String currentDate=data.getStringExtra("currentDate");
                 userLocalStore.storeCurrentDate(currentDate);
-                recreate();
+                refresh();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                recreate();
+                refresh();
             }
         }
     }
@@ -124,103 +143,113 @@ public class MainActivity extends AppCompatActivity {
         new DownloadKhatamDates(this).execute();
     }
 
-    public void setStatus(Button paraBtn, String paraStatusKey) {
-        String status = userLocalStore.readParaStatus(paraStatusKey).equals("0")? "1" : "0" ;
-        userLocalStore.setParaStatus(paraStatusKey, status);
-        paraBtn.setBackgroundColor(getColor(paraStatusKey));
+    public void setNewKhatamDateStatus(int index, char status, Button paraBtn) {
+        if(status == '0') {
+            status = '1';
+            helper.setCharAt(index, status);
+            paraBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.parasButtonON));
+        } else {
+            status = '0';
+            helper.setCharAt(index, status);
+            paraBtn.setBackgroundColor(ContextCompat.getColor(this, R.color.parasButtonOFF));
+        }
     }
 
     public void flipStatus(View view) {
+        if(!initKhatamStatus) {
+            initKhatamStatus();
+            initKhatamStatus = true;
+        }
         switch (view.getId()) {
             case R.id.paraOneButton:
-                setStatus(para1, "status_para_1");
+                setNewKhatamDateStatus(0, helper.charAt(0), para1);
                 break;
             case R.id.paraTwoButton:
-                setStatus(para2, "status_para_2");
+                setNewKhatamDateStatus(2, helper.charAt(2), para2);
                 break;
             case R.id.paraThreeButton:
-                setStatus(para3, "status_para_3");
+                setNewKhatamDateStatus(4, helper.charAt(4), para3);
                 break;
             case R.id.paraFourButton:
-                setStatus(para4, "status_para_4");
+                setNewKhatamDateStatus(6, helper.charAt(6), para4);
                 break;
             case R.id.paraFiveButton:
-                setStatus(para5, "status_para_5");
+                setNewKhatamDateStatus(8, helper.charAt(8), para5);
                 break;
             case R.id.paraSixButton:
-                setStatus(para6, "status_para_6");
+                setNewKhatamDateStatus(10, helper.charAt(10), para6);
                 break;
             case R.id.paraSevenButton:
-                setStatus(para7, "status_para_7");
+                setNewKhatamDateStatus(12, helper.charAt(12), para7);
                 break;
             case R.id.paraEightButton:
-                setStatus(para8, "status_para_8");
+                setNewKhatamDateStatus(14, helper.charAt(14), para8);
                 break;
             case R.id.paraNineButton:
-                setStatus(para9, "status_para_9");
+                setNewKhatamDateStatus(16, helper.charAt(16), para9);
                 break;
             case R.id.paraTenButton:
-                setStatus(para10, "status_para_10");
+                setNewKhatamDateStatus(18, helper.charAt(18), para10);
                 break;
             case R.id.paraElevenButton:
-                setStatus(para11, "status_para_11");
+                setNewKhatamDateStatus(20, helper.charAt(20), para11);
                 break;
             case R.id.paraTwelveButton:
-                setStatus(para12, "status_para_12");
+                setNewKhatamDateStatus(22, helper.charAt(22), para12);
                 break;
             case R.id.paraThirteenButton:
-                setStatus(para13, "status_para_13");
+                setNewKhatamDateStatus(24, helper.charAt(24), para13);
                 break;
             case R.id.paraFourteenButton:
-                setStatus(para14, "status_para_14");
+                setNewKhatamDateStatus(26, helper.charAt(26), para14);
                 break;
             case R.id.paraFifteenButton:
-                setStatus(para15, "status_para_15");
+                setNewKhatamDateStatus(28, helper.charAt(28), para15);
                 break;
             case R.id.paraSixteenButton:
-                setStatus(para16, "status_para_16");
+                setNewKhatamDateStatus(30, helper.charAt(30), para16);
                 break;
             case R.id.paraSeventeenButton:
-                setStatus(para17, "status_para_17");
+                setNewKhatamDateStatus(32, helper.charAt(32), para17);
                 break;
             case R.id.paraEighteenButton:
-                setStatus(para18, "status_para_18");
+                setNewKhatamDateStatus(34, helper.charAt(34), para18);
                 break;
             case R.id.paraNineteenButton:
-                setStatus(para19, "status_para_19");
+                setNewKhatamDateStatus(36, helper.charAt(36), para19);
                 break;
             case R.id.paraTwentyButton:
-                setStatus(para20, "status_para_20");
+                setNewKhatamDateStatus(38, helper.charAt(38), para20);
                 break;
             case R.id.paraTwentyOneButton:
-                setStatus(para21, "status_para_21");
+                setNewKhatamDateStatus(40, helper.charAt(40), para21);
                 break;
             case R.id.paraTwentyTwoButton:
-                setStatus(para22, "status_para_22");
+                setNewKhatamDateStatus(42, helper.charAt(42), para22);
                 break;
             case R.id.paraTwentyThreeButton:
-                setStatus(para23, "status_para_23");
+                setNewKhatamDateStatus(44, helper.charAt(44), para23);
                 break;
             case R.id.paraTwentyFourButton:
-                setStatus(para24, "status_para_24");
+                setNewKhatamDateStatus(46, helper.charAt(46), para24);
                 break;
             case R.id.paraTwentyFiveButton:
-                setStatus(para25, "status_para_25");
+                setNewKhatamDateStatus(48, helper.charAt(48), para25);
                 break;
             case R.id.paraTwentySixButton:
-                setStatus(para26, "status_para_26");
+                setNewKhatamDateStatus(50, helper.charAt(50), para26);
                 break;
             case R.id.paraTwentySevenButton:
-                setStatus(para27, "status_para_27");
+                setNewKhatamDateStatus(52, helper.charAt(52), para27);
                 break;
             case R.id.paraTwentyEightButton:
-                setStatus(para28, "status_para_28");
+                setNewKhatamDateStatus(54, helper.charAt(54), para28);
                 break;
             case R.id.paraTwentyNineButton:
-                setStatus(para29, "status_para_29");
+                setNewKhatamDateStatus(56, helper.charAt(56), para29);
                 break;
             case R.id.paraThirtyButton:
-                setStatus(para30, "status_para_30");
+                setNewKhatamDateStatus(58, helper.charAt(58), para30);
                 break;
         }
     }
@@ -241,9 +270,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateKhatamStatus(View view) {
-        userLocalStore.updateKhatamStatus();
+        if(!initKhatamStatus) {
+            initKhatamStatus();
+            initKhatamStatus = true;
+        }
+        userLocalStore.updateKhatamStatus(helper);
         new UpdateKhatamStatus(this).execute(userLocalStore.readKhatamStatus());
-        recreate();
+        refresh();
     }
 
     public void getKhatamStatus(View view) {

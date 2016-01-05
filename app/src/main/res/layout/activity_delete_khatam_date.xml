@@ -234,8 +234,16 @@
             android:id="@+id/deleteBtn"
             android:layout_below="@id/parasGrid"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onClick="deleteDate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:id="@id/home"
+            android:layout_below="@id/deleteBtn"
+            android:layout_centerHorizontal="true"
+            android:onClick="goToHome" />
 
         <TextView
             android:layout_width="wrap_content"

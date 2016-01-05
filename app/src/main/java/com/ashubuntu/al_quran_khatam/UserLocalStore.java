@@ -28,6 +28,10 @@ public class UserLocalStore {
         editor.apply();
     }
 
+    public String readKhatamDate(int i) {
+        return userLocalDatabase.getString(KHATAM_DATE+i, "");
+    }
+
     public void storeKhatamStatus(List<String> khatamStatus) {
         StringBuilder khatamStatusBuilder = new StringBuilder();
         SharedPreferences.Editor editor = userLocalDatabase.edit();
@@ -84,6 +88,10 @@ public class UserLocalStore {
         SharedPreferences.Editor editor = userLocalDatabase.edit();
         editor.putString("dateCount", String.valueOf(dateCount));
         editor.apply();
+    }
+
+    public int readDateCount() {
+        return Integer.valueOf(userLocalDatabase.getString("dateCount", "-1"));
     }
 
     public void storeParasCompleted(int parasCompleted) {

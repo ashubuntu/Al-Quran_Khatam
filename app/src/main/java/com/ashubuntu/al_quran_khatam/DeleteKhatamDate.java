@@ -61,4 +61,10 @@ public class DeleteKhatamDate extends AppCompatActivity {
     private void downloadKhatamDates() {
         new DownloadKhatamDates(this).execute();
     }
+
+    public void goToHome(View view) {
+        Intent intent = new Intent(DeleteKhatamDate.this, MainActivity.class);
+        setResult(Activity.RESULT_CANCELED, intent);
+        finish();
+    }
 }

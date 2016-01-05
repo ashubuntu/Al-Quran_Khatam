@@ -5,21 +5,30 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddNewKhatamDate extends FragmentActivity {
     UserLocalStore userLocalStore;
     static EditText chosenDateET;
+    static int dateCount;
+    static String duplicateDate;
+    static List<String> khatamDates;
+    static boolean isDuplicateDate = false;
     StringBuilder helper;
     Button  para1, para2, para3, para4, para5,
             para6, para7, para8, para9, para10,
@@ -34,6 +43,7 @@ public class AddNewKhatamDate extends FragmentActivity {
         setContentView(R.layout.activity_add_new_khatam_date);
 
         userLocalStore = new UserLocalStore(AddNewKhatamDate.this);
+        dateCount = userLocalStore.readDateCount();
 
         chosenDateET = (EditText) findViewById(R.id.chosenDateET);
         para1 = (Button) findViewById(R.id.paraOneButton);
@@ -68,13 +78,28 @@ public class AddNewKhatamDate extends FragmentActivity {
         para30 = (Button) findViewById(R.id.paraThirtyButton);
 
         initKhatamStatus();
+        initKhatamDates();
+    }
+
+    public void goToHome(View view) {
+        Intent intent = new Intent(AddNewKhatamDate.this, MainActivity.class);
+        setResult(Activity.RESULT_CANCELED, intent);
+        finish();
     }
 
     private void initKhatamStatus() {
         helper = new StringBuilder();
         for (int i = 0; i<30; i++)
             helper.append("0 ");
-        //Log.d("Helper", helper.toString());
+    }
+
+    private void initKhatamDates() {
+        khatamDates = new ArrayList<>();
+        khatamDates.clear();
+        for (int i = 1; i <= dateCount; i++) {
+            khatamDates.add("");
+            khatamDates.set(i-1, userLocalStore.readKhatamDate(i));
+        }
     }
 
     public void showDatePickerDialog(View view) {
@@ -84,9 +109,22 @@ public class AddNewKhatamDate extends FragmentActivity {
 
     public static void setChosenDate(int year, int month, int day) {
         month ++;
-        String formattedDay = day <= 9?"0" + day : "" + day;
-        String formattedMonth = month <= 9?"0" + month : "" + month ;
+        String formattedDay = day <= 9 ? "0" + day : "" + day;
+        String formattedMonth = month <= 9 ? "0" + month : "" + month ;
         chosenDateET.setText(year + "-" + formattedMonth + "-" + formattedDay);
+        if(checkDuplicateDates()) {
+            isDuplicateDate = true;
+        }
+    }
+
+    public static boolean checkDuplicateDates() {
+        for (int i = 0 ; i < dateCount ; i++) {
+            if(chosenDateET.getText().toString().equals(khatamDates.get(i))) {
+                duplicateDate = khatamDates.get(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     public static class DatePickerFragment extends DialogFragment
@@ -224,7 +262,6 @@ public class AddNewKhatamDate extends FragmentActivity {
             ContentValues dataToSend = new ContentValues();
             dataToSend.put("date", getChosenDate());
             dataToSend.put("khatamStatus", helper.toString());
-            //Log.d("Helper", helper.toString());
             new ServerRequests().sendServerRequest("POST", "insert_new_khatam_date.php", dataToSend);
             return null;
         }
@@ -242,6 +279,25 @@ public class AddNewKhatamDate extends FragmentActivity {
     }
 
     public void createNewDate(View view) {
-        new CreateNewDate().execute();
+        if(isDuplicateDate) {
+            isDuplicateDate = false;
+            createAlertDialog();
+        } else
+            new CreateNewDate().execute();
+    }
+
+    private void createAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("You have already created khatam date \"" + duplicateDate + "\".")
+                .setTitle("Attempt to create duplicate khatam date !!!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(AddNewKhatamDate.this, AddNewKhatamDate.class));
+                        finish();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 }
